@@ -39,7 +39,7 @@ from . import __version__ as VERSION
 
 def main():
     """Main CLI entrypoint."""
-    import skele.commands
+    import jam.commands
     options = docopt(__doc__, version=VERSION)
 
     # Here we'll try to dynamically match the command the user is trying to run
@@ -47,7 +47,7 @@ def main():
     for (k, v) in options.items(): 
         if hasattr(skele.commands, k) and v:
             module = getattr(skele.commands, k)
-            skele.commands = getmembers(module, isclass)
+            jam.commands = getmembers(module, isclass)
             command = [command[1] for command in skele.commands if command[0] != 'Base'][0]
             command = command(options)
             command.run()
